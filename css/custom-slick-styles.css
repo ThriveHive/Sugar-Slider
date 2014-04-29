@@ -1,0 +1,23 @@
+.slick-prev:before, .slick-next:before {
+	color: #222;
+}
+
+button.slick-prev, button.slick-next, button.slick-prev:hover, button.slick-next:hover {
+	background: transparent !important;
+	font-weight: normal;
+}
+
+.slick-slide img { 
+	margin: 0 auto; width: auto !important; 
+}
+
+.slick-slider ul.slick-dots {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.slick-slider ul.slick-dots li {
+	margin-left: 0;
+	margin-right: 0;
+	background: none;
+}
