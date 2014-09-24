@@ -2,10 +2,42 @@ var jq = jQuery.noConflict();
 
 (function( $ ) {
 	$(function() {
-		$('.sugar-slider').slick({
-			dots: true,
-			infinite: true,
-			speed: 500
+		var parseBool = function(arg){
+	        if(typeof arg === 'boolean'){
+	            return arg
+	        } else if(typeof arg === 'string'){
+	            var str = arg.toLowerCase();
+	            if(str === 'false'){
+	                return false
+	            } else if(str === 'true'){
+	                return true
+	            } else {
+	                return undefined;
+	            }
+	        } else {
+	            return undefined;
+	            //throw('argument is not a boolean or a string');
+	        }
+	    };
+
+		$('.sugar-slider').each(function(){
+			var defaults = {
+					infinite: true,
+					speed: 500,
+				},
+				dataSliderOptions = JSON.parse(this.attributes['data-slider'].value);
+
+			for(var x in dataSliderOptions){
+				var parsedBool = parseBool(dataSliderOptions[x]);
+				
+				if(parsedBool !== undefined){
+					dataSliderOptions[x] = parsedBool;
+				}  
+			}
+
+			var slickOptions = $.extend({}, defaults, dataSliderOptions);
+
+			$(this).slick(slickOptions);
 		});
 	});
 

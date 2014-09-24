@@ -41,7 +41,7 @@
 			$images_html = $images_html . '<div class="attachmentId-' . $image_id . '">' . wp_get_attachment_image( $image_id, 'full' ) . '</div>';
 		}
 
-		return '<div class="sugar-slider">' . $images_html . '</div>';
+		return '<div class="sugar-slider" data-slider=' . json_encode($atts) . '>' . $images_html . '</div>';
 	}
 
 	add_shortcode( 'sugar_slider', 'render_sugar_slider' );
