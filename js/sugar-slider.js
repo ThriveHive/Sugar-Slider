@@ -2,6 +2,24 @@ var jq = jQuery.noConflict();
 
 (function( $ ) {
 	$(function() {
+		var parseBool = function(arg){
+	        if(typeof arg === 'boolean'){
+	            return arg
+	        } else if(typeof arg === 'string'){
+	            var str = arg.toLowerCase();
+	            if(str === 'false'){
+	                return false
+	            } else if(str === 'true'){
+	                return true
+	            } else {
+	                return undefined;
+	            }
+	        } else {
+	            return undefined;
+	            //throw('argument is not a boolean or a string');
+	        }
+	    };
+
 		$('.sugar-slider').each(function(){
 			var defaults = {
 					infinite: true,
@@ -9,27 +27,12 @@ var jq = jQuery.noConflict();
 				},
 				dataSliderOptions = JSON.parse(this.attributes['data-slider'].value);
 
-			var parseBool = function(arg){
-		        if(typeof arg === 'boolean'){
-		            return arg
-		        } else if(typeof arg === 'string'){
-		            var str = arg.toLowerCase();
-		            if(str === 'false'){
-		                return false
-		            } else if(str === 'true'){
-		                return true
-		            } else {
-		                return undefined;
-		            }
-		        } else {
-		            return undefined;
-		            //throw('argument is not a boolean or a string');
-		        }
-		    };
-
 			for(var x in dataSliderOptions){
 				var parsedBool = parseBool(dataSliderOptions[x]);
-				parsedBool !== undefined ? dataSliderOptions[x] = parsedBool : null;  
+				
+				if(parsedBool !== undefined){
+					dataSliderOptions[x] = parsedBool;
+				}  
 			}
 
 			var slickOptions = $.extend({}, defaults, dataSliderOptions);
